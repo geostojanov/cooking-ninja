@@ -17,6 +17,12 @@ export default function Recipe() {
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState('')
 
+  const handleClick = () => {
+    projectFirestore.collection('recipes').doc(id).update({
+      title: 'Something'
+    })
+  }
+
   useEffect(() => {
     setIsPending(true)
 
@@ -43,6 +49,7 @@ export default function Recipe() {
             {recipe.ingredients.map(ing => <li key={ing}>{ing}</li>)}
           </ul>
           <p className="method">{recipe.method}</p>
+          <button onClick={() => handleClick()}>Update me</button>
         </>
       )}
     </div>
